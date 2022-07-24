@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sben-chi <sben-chi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 03:55:42 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/24 04:00:57 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/24 19:16:07 by sben-chi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "philo.h"
 
 
 long long	ft_atoi(const char *str)
@@ -23,15 +25,20 @@ long long	ft_atoi(const char *str)
 	while (((str[i] >= 7 && str[i] <= 13) || (str[i] == ' ')))
 		i++;
 	if (str[i] == '-')
-		sign *= -1;
-	if (str[i] == '-' || str[i] == '+')
+		ft_error();
+	if (str[i] == '+')
 		i++;
 	while (str[i] && str[i] >= 48 && str[i] <= 57)
 	{
 		number = number * 10 + (str[i] - '0');
-		if (number > 2147483647)
-			return (0);
+		// if (number > 2147483647)
+		// 	return (0);
 		i++;
+	}
+	if (str[i] != '\0')
+	{
+		printf("Error: wrong argements\n");
+		exit(1);
 	}
 	return (number * sign);
 }
@@ -57,10 +64,17 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_isdigit(int c)
+// int	ft_isdigit(int c)
+// {
+// 	if (c >= 48 && c <= 57)
+// 		return (1);
+// 	else
+//         return (0);
+// }
+
+
+void	ft_error()
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	else
-        return (0);
+	printf("Error: Invalid Arguments\n");
+	exit(1);
 }
