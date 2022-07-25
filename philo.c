@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:34:22 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/25 20:18:33 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/25 20:23:38 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 unsigned int get_curr_time()
 {
-    int time;
+    unsigned int time;
     struct timeval start;
 
     gettimeofday(&start, NULL);
@@ -25,7 +25,7 @@ unsigned int get_curr_time()
 
 void ft_usleep(unsigned int duration)
 {
-    unsigned int now; 
+   unsigned int now; 
 
     now = get_curr_time();
     while (get_curr_time() - now < duration)
