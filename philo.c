@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:34:22 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/25 20:23:38 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/25 21:32:58 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,24 +142,26 @@ int main (int ac , char **argv)
 
     philos = malloc (sizeof(t_philo) * data.number_of_philos);
     philosophers = malloc(sizeof(pthread_t) * data.number_of_philos);
-    data.forks = malloc(sizeof(int) * data.number_of_philos);
+    data.forks = malloc(sizeof(pthread_mutex_t) * data.number_of_philos);
+
     pthread_mutex_init(&data.philo_print, NULL);
     while (i < data.number_of_philos)
     {
         philos[i].id = i + 1;
         philos[i].meals_count = 0;
         philos[i].data = &data;
+
         pthread_mutex_init(&data.forks[i++], NULL);
 
     }
     i = 0;
     while (i < data.number_of_philos)
         {
-            // philo.id = i + 1;
             pthread_create(&philosophers[i], NULL, &thread_logic, (void *) &philos[i]);
             i++;
             ft_usleep(100);
         }
-    while(1);
+    while (1);
+   
     return (0);
 }
