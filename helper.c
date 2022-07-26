@@ -3,15 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   helper.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sben-chi <sben-chi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 03:55:42 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/24 19:16:07 by sben-chi         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:51:33 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+
+void	ft_error()
+{
+	printf("Error: Invalid Arguments\n");
+	exit(1);
+}
 
 long long	ft_atoi(const char *str)
 {
@@ -35,10 +41,9 @@ long long	ft_atoi(const char *str)
 		// 	return (0);
 		i++;
 	}
-	if (str[i] != '\0')
+	if (str[i] != '\0' || str[0] == '\0')
 	{
-		printf("Error: wrong argements\n");
-		exit(1);
+		ft_error();
 	}
 	return (number * sign);
 }
@@ -72,9 +77,3 @@ int	ft_strlen(char *str)
 //         return (0);
 // }
 
-
-void	ft_error()
-{
-	printf("Error: Invalid Arguments\n");
-	exit(1);
-}

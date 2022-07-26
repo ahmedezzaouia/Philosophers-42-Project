@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:29:20 by sben-chi          #+#    #+#             */
-/*   Updated: 2022/07/26 15:06:24 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/26 19:42:14 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@
 
 
 typedef struct s_data {
-    unsigned int number_of_philos;
-    unsigned int time_to_die;
-    unsigned int time_to_eat;
-    unsigned int time_to_sleep;
-    unsigned int number_of_meals;
+    int number_of_philos;
+    time_t time_to_die;
+    time_t time_to_eat;
+    time_t time_to_sleep;
+    int number_of_meals;
     pthread_mutex_t *forks;
     pthread_mutex_t philo_print;
-    unsigned int start_time;
+    time_t start_time;
     pthread_mutex_t meals_count_mutex;
+    pthread_mutex_t last_meals_time_mutex;
+    int is_died;
 
 } t_data;
 
@@ -37,7 +39,9 @@ typedef struct s_data {
 typedef struct s_philo {
     int id;
     int meals_count;
+    time_t last_meal_time;
     t_data *data;
+    
 } t_philo;
 
 

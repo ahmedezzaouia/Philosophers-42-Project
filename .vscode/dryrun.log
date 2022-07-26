@@ -1,4 +1,6 @@
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/ahmez-za/Desktop/philosopher'
-gcc  philo.c helper.c -o philo -fsanitize=thread
+gcc  philo.c helper.c -o philo  -Wall -Wextra -Werror -pthread
+ 
 make: Leaving directory `/Users/ahmez-za/Desktop/philosopher'
  
