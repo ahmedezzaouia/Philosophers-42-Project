@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:34:22 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/25 21:32:58 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:53:57 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void ft_usleep(unsigned int duration)
    unsigned int now; 
 
     now = get_curr_time();
-    while (get_curr_time() - now < duration)
+    while ((get_curr_time() - now) < duration)
     {
         usleep(50);
     }
@@ -64,16 +64,45 @@ void    ft_print_philos (t_philo *philo, int cycle)
         
 }
 
+int    check_if_philo_eat_at_least(t_philo *philos, t_data *data)
+{
+    int i;
+    int k;
+
+    i = 0;
+    k = 0;
+    while (i < data->number_of_philos )
+    {
+    pthread_mutex_lock(&data->meals_count_mutex);
+
+        if (philos[i].meals_count >= data->number_of_meals)
+            k++;
+        i++;
+    pthread_mutex_unlock(&data->meals_count_mutex);
+
+    }
+    if (k == i)
+        return (1);
+    return (0);
+    
+}
+
 void    eating(t_philo *philo)
 {
-    pthread_mutex_lock(&philo->data->forks[philo->id]);
+    pthread_mutex_lock(&philo->data->forks[philo->id - 1]);
     ft_print_philos(philo, 0);
-    pthread_mutex_lock(&philo->data->forks[(philo->id + 1) % philo->data->number_of_philos]);
+    pthread_mutex_lock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
     ft_print_philos(philo, 0);
     ft_print_philos(philo, -1);
     ft_usleep(philo->data->time_to_eat);
-    pthread_mutex_unlock(&philo->data->forks[philo->id]);
-    pthread_mutex_unlock(&philo->data->forks[(philo->id + 1) % philo->data->number_of_philos]);
+    pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);
+    pthread_mutex_unlock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
+
+    pthread_mutex_lock(&philo->data->meals_count_mutex);
+    if(philo->data->number_of_meals != -1)
+        philo->meals_count += 1;
+    pthread_mutex_unlock(&philo->data->meals_count_mutex);
+    
 }
 
 void    sleeping(t_philo *philo)
@@ -95,6 +124,8 @@ void* thread_logic(void *ph)
 {
    t_philo *philo = (t_philo *) ph;
     
+    if (!(philo->id % 2))
+        usleep(100);
     while(1)
     {
         eating(philo);
@@ -108,6 +139,7 @@ void* thread_logic(void *ph)
 
 void parsing_arguments(int ac , char **argv, t_data *data)
 {
+    pthread_mutex_init(&data->meals_count_mutex, NULL);
     if (ac != 5 && ac != 6)
         ft_error();
 
@@ -126,42 +158,42 @@ void parsing_arguments(int ac , char **argv, t_data *data)
 }
 
 
+
 int main (int ac , char **argv)
 {
     int i;
     pthread_t *philosophers;
-    // t_philo philo;
-    t_data data;
+    t_data *data;
     t_philo *philos;
     i = 0;
-    parsing_arguments(ac, argv, &data);
-    // printf("number_of_philos = %d\n", philo.data.number_of_philos);
-    // printf("time_to_die = %d\n", philo.data.time_to_die);
-    
-    // printf("***********************************\n");
 
-    philos = malloc (sizeof(t_philo) * data.number_of_philos);
-    philosophers = malloc(sizeof(pthread_t) * data.number_of_philos);
-    data.forks = malloc(sizeof(pthread_mutex_t) * data.number_of_philos);
+    data = malloc(sizeof(t_data));
+    parsing_arguments(ac, argv, data);
+    philos = malloc (sizeof(t_philo) * data->number_of_philos);
+    philosophers = malloc(sizeof(pthread_t) * data->number_of_philos);
+    data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philos);
 
-    pthread_mutex_init(&data.philo_print, NULL);
-    while (i < data.number_of_philos)
+    pthread_mutex_init(&data->philo_print, NULL);
+    while (i < data->number_of_philos)
     {
         philos[i].id = i + 1;
         philos[i].meals_count = 0;
-        philos[i].data = &data;
+        philos[i].data = data;
 
-        pthread_mutex_init(&data.forks[i++], NULL);
+        pthread_mutex_init(&data->forks[i++], NULL);
 
     }
     i = 0;
-    while (i < data.number_of_philos)
-        {
+    while (i < data->number_of_philos)
+    {
             pthread_create(&philosophers[i], NULL, &thread_logic, (void *) &philos[i]);
             i++;
-            ft_usleep(100);
-        }
-    while (1);
-   
+            // usleep(100);
+    }
+    while (1)
+    {
+        if(check_if_philo_eat_at_least(philos, data))
+            break;
+    }
     return (0);
 }

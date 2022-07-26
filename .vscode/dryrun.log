@@ -1,0 +1,4 @@
+make: Entering directory `/Users/ahmez-za/Desktop/philosopher'
+gcc  philo.c helper.c -o philo -fsanitize=thread
+make: Leaving directory `/Users/ahmez-za/Desktop/philosopher'
+ 

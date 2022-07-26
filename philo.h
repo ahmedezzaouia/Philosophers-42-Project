@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:29:20 by sben-chi          #+#    #+#             */
-/*   Updated: 2022/07/25 19:34:07 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/26 15:06:24 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_data {
     pthread_mutex_t *forks;
     pthread_mutex_t philo_print;
     unsigned int start_time;
+    pthread_mutex_t meals_count_mutex;
 
 } t_data;
 
