@@ -43,7 +43,7 @@ void    ft_print_philos (t_philo *philo, int cycle)
     pthread_mutex_lock(&philo->data->philo_print);
     if (philo->data->is_died == 1)
     {
-        printf("");
+        printf(" ");
     }
     else if (!cycle)
     {
@@ -80,7 +80,7 @@ int    check_if_philo_eat_at_least(t_philo *philos, t_data *data)
     i = 0;
 
     pthread_mutex_lock(&data->meals_count_mutex);
-    while (philos[i].meals_count >= data->number_of_meals)
+    while (i < data->number_of_philos && philos[i].meals_count >= data->number_of_meals)
         {
             i++;
         }
@@ -101,10 +101,10 @@ int    check_if_philo_is_die(t_philo *philos, t_data *data)
     while (i < data->number_of_philos)
     {
     pthread_mutex_lock(&data->last_meals_time_mutex);
-        if ((get_curr_time() - philos[i].last_meal_time) >= data->time_to_die)
+        if ((get_curr_time() - philos[i].last_meal_time) > data->time_to_die)
         {
+        printf("last meal time == %ld --- time to die == %ld\n",get_curr_time() - philos[i].last_meal_time, data->time_to_die);
                 ft_print_philos(&(philos[i]), 3);
-                ft_usleep(10);
                 return(1);
         }
         i++;
@@ -120,17 +120,17 @@ void    eating(t_philo *philo)
     pthread_mutex_lock(&philo->data->forks[philo->id - 1]);
     ft_print_philos(philo, 0);
     pthread_mutex_lock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
-
-    ft_print_philos(philo, 0);
-    ft_print_philos(philo, -1);
     
     pthread_mutex_lock(&philo->data->last_meals_time_mutex);
     philo->last_meal_time = get_curr_time();
     pthread_mutex_unlock(&philo->data->last_meals_time_mutex);
 
+    ft_print_philos(philo, 0);
+    ft_print_philos(philo, -1);
+
     ft_usleep(philo->data->time_to_eat);
-    pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);
-    pthread_mutex_unlock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
+    // pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);
+    // pthread_mutex_unlock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
 
     pthread_mutex_lock(&philo->data->meals_count_mutex);
     if(philo->data->number_of_meals != -1)
@@ -147,6 +147,8 @@ void    sleeping(t_philo *philo)
     
 
     ft_print_philos(philo, 1);
+    pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);
+    pthread_mutex_unlock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
     ft_usleep(philo->data->time_to_sleep);
 
 }

@@ -14,14 +14,15 @@
 SRCS = philo.c helper.c
 NAME = philo
 CC = gcc 
-CFLAGS = -Wall -Wextra -Werror -pthread
+# CFLAGS = -Wall -Wextra -Werror -pthread
 # FSANITIZ = -fsanitize=thread
+# FSANITIZ = -fsanitize=address
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(SRCS)
-	$(CC) $(SRCS) -o $(NAME) $(FSANITIZ) $(CFLAGS)
+	$(CC) $(SRCS) -o $(NAME) $(FSANITIZ) $(CFLAGS) -pthread
 
 clean:
 	rm -f $(OBJS)
