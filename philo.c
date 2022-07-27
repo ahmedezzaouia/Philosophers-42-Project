@@ -6,13 +6,13 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:34:22 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/27 01:38:22 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/27 02:02:57 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-unsigned int get_curr_time()
+time_t get_curr_time()
 {
     time_t time;
     struct timeval start;
@@ -23,7 +23,7 @@ unsigned int get_curr_time()
 
 }
 
-void ft_usleep(unsigned int duration)
+void ft_usleep(time_t duration)
 {
    time_t now; 
 
@@ -243,7 +243,6 @@ int main (int ac , char **argv)
             i++;
             usleep(100);
     }
-
     while (1)
     {
         if(check_if_philo_eat_at_least(philos, data) || check_if_philo_is_die(philos, data))
