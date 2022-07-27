@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:34:22 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/26 23:53:27 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/27 01:38:22 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,16 +175,17 @@ void* thread_logic(void *ph)
 
 
 
-void parsing_arguments(int ac , char **argv, t_data *data)
+int parsing_arguments(int ac , char **argv, t_data *data)
 {
     pthread_mutex_init(&data->meals_count_mutex, NULL);
     pthread_mutex_init(&data->last_meals_time_mutex, NULL);
     if (ac != 5 && ac != 6)
-        ft_error();
+        return (0);
 
+    if (ft_atoi(argv[1]) == -1 || ft_atoi(argv[2]) == -1 || ft_atoi(argv[3]) == -1 || ft_atoi(argv[4]) == -1)
+        return (0);
         if (ft_atoi(argv[1]) == 0 || ft_atoi(argv[2]) == 0)
-            ft_error();
-
+            return (0);
         data->is_died = 0;
         data->start_time = get_curr_time();
         data->number_of_philos =  ft_atoi(argv[1]);
@@ -195,11 +196,13 @@ void parsing_arguments(int ac , char **argv, t_data *data)
         if (ac == 6)
         {
             data->number_of_meals =  ft_atoi(argv[5]);
-            if (data->number_of_meals == 0)
-                ft_error();
+            if (data->number_of_meals == 0 ||data->number_of_meals == -1)
+                return (0);
         }
         else
             data->number_of_meals =  -1;
+
+        return (1);
  
 }
 
@@ -214,7 +217,11 @@ int main (int ac , char **argv)
     i = 0;
 
     data = malloc(sizeof(t_data));
-    parsing_arguments(ac, argv, data);
+    if (!parsing_arguments(ac, argv, data))
+    {
+        printf("error: invalid Arguments\n");
+        return (0);
+    }
     philos = malloc (sizeof(t_philo) * data->number_of_philos);
     philosophers = malloc(sizeof(pthread_t) * data->number_of_philos);
     data->forks = malloc(sizeof(pthread_mutex_t) * data->number_of_philos);
@@ -236,6 +243,7 @@ int main (int ac , char **argv)
             i++;
             usleep(100);
     }
+
     while (1)
     {
         if(check_if_philo_eat_at_least(philos, data) || check_if_philo_is_die(philos, data))

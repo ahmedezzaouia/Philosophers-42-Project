@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 03:55:42 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/26 23:51:33 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/26 23:58:05 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ long long	ft_atoi(const char *str)
 	while (((str[i] >= 7 && str[i] <= 13) || (str[i] == ' ')))
 		i++;
 	if (str[i] == '-')
-		ft_error();
+		return (-1);
 	if (str[i] == '+')
 		i++;
 	while (str[i] && str[i] >= 48 && str[i] <= 57)
@@ -43,7 +43,7 @@ long long	ft_atoi(const char *str)
 	}
 	if (str[i] != '\0' || str[0] == '\0')
 	{
-		ft_error();
+		return (-1);
 	}
 	return (number * sign);
 }
