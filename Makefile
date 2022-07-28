@@ -6,7 +6,7 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/24 04:34:02 by ahmez-za          #+#    #+#              #
-#    Updated: 2022/07/28 03:08:44 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/07/28 17:09:34 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
-	$(CC) $(SRCS) -o $(NAME) $(CFLAGS) 
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -o $(NAME) $(CFLAGS) 
 
 clean:
 	rm -f $(OBJS)
