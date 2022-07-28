@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:29:20 by sben-chi          #+#    #+#             */
-/*   Updated: 2022/07/28 03:06:58 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/28 15:33:26 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct s_philo {
 }	t_philo;
 
 long long	ft_atoi(const char *str);
-int			ft_strlen(char *str);
 time_t		get_curr_time(void);
 void		ft_usleep(time_t duration);
 void		ft_print_philos(t_philo *philo, char *message);
