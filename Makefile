@@ -6,12 +6,12 @@
 #    By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/24 04:34:02 by ahmez-za          #+#    #+#              #
-#    Updated: 2022/07/28 00:10:16 by ahmez-za         ###   ########.fr        #
+#    Updated: 2022/07/28 01:55:29 by ahmez-za         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-SRCS = philo.c helper.c
+SRCS = philo.c helper.c helper2.c philo_life.c
 NAME = philo
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -pthread

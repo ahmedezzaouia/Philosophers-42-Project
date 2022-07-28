@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 16:29:20 by sben-chi          #+#    #+#             */
-/*   Updated: 2022/07/26 19:42:14 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/28 01:56:27 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,15 @@ typedef struct s_philo {
 long long ft_atoi(const char *str);
 int	ft_strlen(char *str);
 void	ft_error();
+time_t get_curr_time();
+void ft_usleep(time_t duration);
+void    ft_print_philos (t_philo *philo, int cycle);
+void    eating(t_philo *philo);
+void    sleeping(t_philo *philo);
+void    thinking(t_philo *philo);
+void* routine(void *ph);
+int    check_if_at_least_or_die(t_philo *philos, t_data *data);
+int parsing_arguments(int ac , char **argv, t_data *data);
+
 
 #endif

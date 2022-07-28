@@ -6,18 +6,11 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 03:55:42 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/26 23:58:05 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/28 01:49:54 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-
-void	ft_error()
-{
-	printf("Error: Invalid Arguments\n");
-	exit(1);
-}
 
 long long	ft_atoi(const char *str)
 {
@@ -48,32 +41,63 @@ long long	ft_atoi(const char *str)
 	return (number * sign);
 }
 
-
-
-// void	ft_usleep(long long time)
-// {
-// 	long long	num;
-
-// 	num = get_current_time();
-// 	while (get_current_time() - num < time)
-// 		usleep(500);
-// }
-
-int	ft_strlen(char *str)
+time_t get_curr_time()
 {
-	int	i;
+    time_t time;
+    struct timeval start;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+    gettimeofday(&start, NULL);
+    time = (start.tv_sec * 1000) + (start.tv_usec / 1000);
+    return (time);
+
 }
 
-// int	ft_isdigit(int c)
-// {
-// 	if (c >= 48 && c <= 57)
-// 		return (1);
-// 	else
-//         return (0);
-// }
+void ft_usleep(time_t duration)
+{
+   time_t now; 
 
+    now = get_curr_time();
+    while ((get_curr_time() - now) < duration)
+    {
+        usleep(50);
+    }
+    
+}
+
+void    ft_print_philos (t_philo *philo, int cycle)
+{
+    time_t time;
+
+    time = get_curr_time() - philo->data->start_time;
+    pthread_mutex_lock(&philo->data->philo_print);
+    if (philo->data->is_died == 1)
+    {
+        printf(" ");
+    }
+    else if (!cycle)
+    {
+       printf("[%ld] %d has taken a fork\n",time, philo->id);
+    }
+    else if (cycle == -1)
+    {
+
+        printf("[%ld] %d philo Eating\n", time, philo->id);
+    }
+    
+    else if (cycle == 1)
+    {
+        
+         printf("[%ld] %d philo sleeping\n", time, philo->id); 
+    }
+    else if (cycle == 2)
+    {
+        printf("[%ld] %d philo thinking\n",time, philo->id);
+    }
+    else if (cycle == 3)
+    {
+        printf("[%ld] %d died\n",time, philo->id);
+        philo->data->is_died = 1;
+    }
+    pthread_mutex_unlock(&philo->data->philo_print);
+        
+}
