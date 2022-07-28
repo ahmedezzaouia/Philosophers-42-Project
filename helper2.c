@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 01:53:53 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/28 01:56:29 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/28 02:21:30 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int    check_if_at_least_or_die(t_philo *philos, t_data *data)
             if ((get_curr_time() - philos[i].last_meal_time) >= data->time_to_die)
                 {
                     printf("philo %d last meal time == %ld --- time to die == %ld\n",philos[i].id, get_curr_time() - philos[i].last_meal_time, data->time_to_die);
-                        ft_print_philos(&(philos[i]), 3);
+                        ft_print_philos(&(philos[i]), "died");
                         return(1);
                 }
             pthread_mutex_unlock(&data->last_meals_time_mutex);

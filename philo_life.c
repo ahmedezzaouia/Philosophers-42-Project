@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 01:50:37 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/28 01:52:20 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/28 02:20:31 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 void    eating(t_philo *philo)
 {
     pthread_mutex_lock(&philo->data->forks[philo->id - 1]);
-    ft_print_philos(philo, 0);
+    ft_print_philos(philo, "has taken a fork");
     pthread_mutex_lock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
     
     pthread_mutex_lock(&philo->data->last_meals_time_mutex);
     philo->last_meal_time = get_curr_time();
     pthread_mutex_unlock(&philo->data->last_meals_time_mutex);
 
-    ft_print_philos(philo, 0);
-    ft_print_philos(philo, -1);
+    ft_print_philos(philo, "has taken a fork");
+    ft_print_philos(philo, "philo Eating");
 
     ft_usleep(philo->data->time_to_eat);
     // pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);
@@ -44,7 +44,7 @@ void    sleeping(t_philo *philo)
 {
     
 
-    ft_print_philos(philo, 1);
+    ft_print_philos(philo, "philo sleeping");
     pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);
     pthread_mutex_unlock(&philo->data->forks[(philo->id) % philo->data->number_of_philos]);
     ft_usleep(philo->data->time_to_sleep);
@@ -53,7 +53,7 @@ void    sleeping(t_philo *philo)
 
 void    thinking(t_philo *philo)
 {
-    ft_print_philos(philo, 2);
+    ft_print_philos(philo, "philo thinking");
 }
 
 
