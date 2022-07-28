@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/24 03:55:42 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/28 01:49:54 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/28 02:14:55 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ long long	ft_atoi(const char *str)
 	while (str[i] && str[i] >= 48 && str[i] <= 57)
 	{
 		number = number * 10 + (str[i] - '0');
-		// if (number > 2147483647)
-		// 	return (0);
+		if (number > 9223372036854775807)
+			return (0);
 		i++;
 	}
 	if (str[i] != '\0' || str[0] == '\0')
@@ -41,7 +41,7 @@ long long	ft_atoi(const char *str)
 	return (number * sign);
 }
 
-time_t get_curr_time()
+time_t  get_curr_time()
 {
     time_t time;
     struct timeval start;
