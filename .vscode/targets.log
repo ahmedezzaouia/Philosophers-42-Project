@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Tue Jul 26 23:50:38 2022
+# Make data base, printed on Thu Jul 28 01:40:21 2022
 
 # Variables
 
@@ -20,11 +20,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
- 
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/ahmez-za/Desktop/philosopher
+CURDIR := /Users/ahmez-za/Desktop/Philosophers-42-Project
 # makefile
 SHELL = /bin/sh
 # environment
@@ -37,28 +36,29 @@ CFLAGS = -Wall -Wextra -Werror -pthread
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 14)
 SRCS = philo.c helper.c
-# makefile (from `Makefile', line 19)
+# makefile (from `Makefile', line 20)
 OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_CWD = /
 # environment
-Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.iRo0pX450X/Render
+Apple_PubSub_Socket_Render = /private/tmp/com.apple.launchd.y5ZzP03jSu/Render
 # environment
 PATH = /Users/ahmez-za/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/ahmez-za/n/bin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
 ELECTRON_RUN_AS_NODE = 1
+ 
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.vVjqCxiGBA/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.PFs3cE5M5g/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 HOMEBREW_TEMP = /tmp/ahmez-za/Homebrew/Temp
 # environment
-PWD = /Users/ahmez-za/Desktop/philosopher
+PWD = /Users/ahmez-za/Desktop/Philosophers-42-Project
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
@@ -90,7 +90,7 @@ HOMEBREW_CACHE = /tmp/ahmez-za/Homebrew/Caches
 # environment
 SHLVL = 1
 # makefile (from `Makefile', line 16)
-CC = gcc 
+CC = gcc
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -124,7 +124,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x1000003c.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000004.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -142,7 +142,7 @@ PAGER = less
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 188d9
+SECURITYSESSIONID = 186a8
 # automatic
 ^F = $(notdir $^)
 # default
@@ -154,9 +154,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 73558
+VSCODE_PID = 4003
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=5/105=5%
+# Load=71/1024=7%, Rehash=0, Collisions=4/98=4%
 
 # Pattern-specific Variable Values
 
@@ -164,9 +164,9 @@ VSCODE_PID = 73558
 
 # Directories
 
-# . (device 16777227, inode 8191436): 12 files, no impossibilities.
+# . (device 16777227, inode 8443280): 13 files, no impossibilities.
 
-# 12 files, no impossibilities in 1 directories.
+# 13 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -179,36 +179,19 @@ all: philo
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 philo: philo.c helper.c
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
-#  Last modified 2022-07-26 22:59:36
+#  Last modified 2022-07-28 00:53:40
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := philo
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := philo.c helper.c
-# automatic
-# | := 
-# automatic
-# < := philo.c
-# automatic
-# ^ := philo.c helper.c
-# automatic
-# ? := philo.c helper.c
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/15=13%
-#  commands to execute (from `Makefile', line 24):
-	$(CC) $(SRCS) -o $(NAME) $(FSANITIZ) $(CFLAGS)
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 25):
+	$(CC) $(SRCS) -o $(NAME) $(FSANITIZ) $(CFLAGS) 
 	
 
 # Not a target:
@@ -220,7 +203,7 @@ philo: philo.c helper.c
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-26 22:35:15
+#  Last modified 2022-07-28 00:10:16
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -229,7 +212,7 @@ Makefile:
 # Not a target:
 philo.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-26 23:47:19
+#  Last modified 2022-07-28 00:53:37
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -239,7 +222,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 30):
+#  commands to execute (from `Makefile', line 31):
 	rm -f $(NAME)
 	
 
@@ -258,21 +241,21 @@ clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 27):
+#  commands to execute (from `Makefile', line 28):
 	rm -f $(OBJS)
 	
 
 # Not a target:
 helper.c:
 #  Implicit rule search has been done.
-#  Last modified 2022-07-26 23:46:23
+#  Last modified 2022-07-27 22:05:07
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=10/1024=1%, Rehash=0, Collisions=0/30=0%
+# Load=10/1024=1%, Rehash=0, Collisions=0/29=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -284,6 +267,6 @@ helper.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Jul 26 23:50:38 2022
+# Finished Make data base on Thu Jul 28 01:40:21 2022
 
  

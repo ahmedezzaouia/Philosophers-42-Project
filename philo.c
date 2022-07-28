@@ -6,7 +6,7 @@
 /*   By: ahmez-za <ahmez-za@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 14:34:22 by ahmez-za          #+#    #+#             */
-/*   Updated: 2022/07/27 02:02:57 by ahmez-za         ###   ########.fr       */
+/*   Updated: 2022/07/28 00:53:37 by ahmez-za         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,30 @@ void    ft_print_philos (t_philo *philo, int cycle)
 int    check_if_philo_eat_at_least(t_philo *philos, t_data *data)
 {
     int i;
+    int k;
 
     i = 0;
+    k = 0;
 
     pthread_mutex_lock(&data->meals_count_mutex);
-    while (i < data->number_of_philos && philos[i].meals_count >= data->number_of_meals)
+
+    while (i < data->number_of_philos )
         {
+            // printf("number of meals == %d && meal count == %d\n",data->number_of_meals,  philos[i].meals_count );
+            pthread_mutex_lock(&data->last_meals_time_mutex);
+            if ((get_curr_time() - philos[i].last_meal_time) >= data->time_to_die)
+                {
+                    printf("philo %d last meal time == %ld --- time to die == %ld\n",philos[i].id, get_curr_time() - philos[i].last_meal_time, data->time_to_die);
+                        ft_print_philos(&(philos[i]), 3);
+                        return(1);
+                }
+            pthread_mutex_unlock(&data->last_meals_time_mutex);
+            if (philos[i].meals_count >= data->number_of_meals)
+                k++;
             i++;
         }
     pthread_mutex_unlock(&data->meals_count_mutex);
-    if (i == data->number_of_philos && data->number_of_meals != -1)
+    if (k == data->number_of_philos && data->number_of_meals != -1)
         return (1);
     return (0);
     
@@ -103,7 +117,7 @@ int    check_if_philo_is_die(t_philo *philos, t_data *data)
     pthread_mutex_lock(&data->last_meals_time_mutex);
         if ((get_curr_time() - philos[i].last_meal_time) > data->time_to_die)
         {
-        printf("last meal time == %ld --- time to die == %ld\n",get_curr_time() - philos[i].last_meal_time, data->time_to_die);
+        printf("philo %d last meal time == %ld --- time to die == %ld\n",philos[i].id, get_curr_time() - philos[i].last_meal_time, data->time_to_die);
                 ft_print_philos(&(philos[i]), 3);
                 return(1);
         }
@@ -137,6 +151,7 @@ void    eating(t_philo *philo)
         philo->meals_count += 1;
     pthread_mutex_unlock(&philo->data->meals_count_mutex);
 
+            printf("number of meals == %d && meal count == %d\n",philo->data->number_of_meals,  philo->meals_count );
 
 
     
@@ -247,7 +262,7 @@ int main (int ac , char **argv)
     }
     while (1)
     {
-        if(check_if_philo_eat_at_least(philos, data) || check_if_philo_is_die(philos, data))
+        if(check_if_philo_eat_at_least(philos, data))
             break;
     }
     return (0);

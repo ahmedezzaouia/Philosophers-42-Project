@@ -1,6 +1,5 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/ahmez-za/Desktop/philosopher'
-gcc  philo.c helper.c -o philo  -Wall -Wextra -Werror -pthread
- 
-make: Leaving directory `/Users/ahmez-za/Desktop/philosopher'
+make: Entering directory `/Users/ahmez-za/Desktop/Philosophers-42-Project'
+gcc philo.c helper.c -o philo  -Wall -Wextra -Werror -pthread 
+make: Leaving directory `/Users/ahmez-za/Desktop/Philosophers-42-Project'
  
